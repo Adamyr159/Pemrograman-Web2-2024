@@ -10,7 +10,8 @@
 </head>
 <body>
     <div class="container">
-        <h2>Form Registrasi Nurul Fikri</h2>
+        <h2>Form Registrasi</h2>
+
         <form method="POST">
             <div class="form-group row">
                 <label for="nim" class="col-4 col-form-label">NIM</label> 
@@ -40,18 +41,18 @@
             <div class="form-group row">
                 <label for="domisili" class="col-4 col-form-label">Domisili</label> 
                 <div class="col-8">
-                    <select id="domisili" name="domisili" class="custom-select" required="required">
-                        <?php foreach($domisili as $dom){ ?>
-                            <option value="<?= $dom;?>"><?= $dom;?></option>
-                        <?php }; ?>
-                    </select>
+                <select id="domisili" name="domisili" class="custom-select" required="required">
+                    <?php foreach($domisili as $dom){ ?>
+                        <option value="<?= $dom; ?>"><?= $dom; ?></option>
+                    <?php } ?>
+                </select>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="program_studi" class="col-4 col-form-label">Program Studi</label> 
                 <div class="col-8">
                 <select id="program_studi" name="program_studi" class="custom-select" required="required">
-                    <?php foreach($program_studi as $key => $value ){ ?>
+                    <?php foreach($program_studi as $key => $value){ ?>
                         <option value="<?= $key; ?>"><?= $value; ?></option>
                     <?php } ?>
                 </select>
@@ -82,6 +83,7 @@
                 </div>
                 </div>
             </div>
+            
             <div class="form-group row">
                 <label for="email" class="col-4 col-form-label">Email</label> 
                 <div class="col-8">
@@ -94,37 +96,36 @@
                 </div>
             </div>
         </form>
-        <?php 
-        if (isset($_POST['submit'])){
+        <?php if(isset($_POST['submit'])) { 
             $nim = $_POST['nim'];
             $name = $_POST['name'];
             $gender = $_POST['gender'];
             $domisili = $_POST['domisili'];
             $program_studi = $_POST['program_studi'];
-            $skills_user = $_POST['skills'];
+            $skills = $_POST['skills'];
             $email = $_POST['email'];
-
-        ?>
-        <table class="table table-bordered">
-            <tr class="table-success">
-                <td>NIM</td>
-                <td>Nama</td>
-                <td>Jenis Kelamin</td>
-                <td>Domisili</td>
-                <td>Program Studi</td>
-                <td>Skill</td>
-                <td>Email</td>
-            </tr>
-            <tr>
-                <td><?= $nim; ?></td>
-                <td><?= $name; ?></td>
-                <td><?= $gender; ?></td>
-                <td><?= $domisili; ?></td>
-                <td><?= $program_studi; ?></td>
-                <td><?= $skills_user; ?></td>
-                <td><?= $email; ?></td>
-            </tr>
-        </table>
+            
+        ?>               
+            <table class="table table-bordered">
+                <tr class="table-primary">
+                    <th>NIM</th>
+                    <th>Nama</th>
+                    <th>Gender</th>
+                    <th>Domisili</th>
+                    <th>Program Studi</th>
+                    <th>Skill Programming</th>
+                    <th>Email</th>
+                </tr>
+                <tr>
+                    <td><?= $nim; ?></td>
+                    <td><?= $name; ?></td>
+                    <td><?= $gender; ?></td>
+                    <td><?= $domisili; ?></td>
+                    <td><?= $program_studi; ?></td>
+                    <td><?= $skills; ?></td>
+                    <td><?= $email; ?></td>
+                </tr>
+            </table>
         <?php } ?>
     </div>
 </body>
