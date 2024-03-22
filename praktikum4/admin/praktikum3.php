@@ -1,15 +1,8 @@
-<?php require_once "proses_registrasi.php"; ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Registrasi</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
-    <div class="container">
+<?php 
+require_once 'navbar.html';
+require_once 'sidebar.html';
+?>
+<div class="container">
         <h2>Form Registrasi</h2>
 
         <form method="POST">
@@ -117,5 +110,7 @@
             </table>
         <?php } ?>
     </div>
-</body>
-</html>
+
+<?php
+require_once 'footer.html';
+?>
