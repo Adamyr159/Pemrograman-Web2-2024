@@ -1,11 +1,10 @@
 <?php 
 require_once 'koneksi.php';
 
-if (isset($_POST['submit'])){
+if(isset($_POST['submit'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
-
-    $query = "SELECT * FROM users WHERE username=? AND password=?";
+    $query = "SELECT * FROM users WHERE username=? and password=?";
     $user = $dbh->prepare($query);
     $user->execute([$username, $password]);
 
@@ -13,10 +12,9 @@ if (isset($_POST['submit'])){
     if($count > 0){
         session_start();
         $_SESSION['user'] = $user->fetch();
-        header("location: index.php");
+        header('location: index.php');
     } else {
-        header("location: login.php");
+        header('location: login.php');
     }
 }
-
 ?>
