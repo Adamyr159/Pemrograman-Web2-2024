@@ -62,22 +62,16 @@ class KelurahanController
      */
     public function update(Request $request, string $id)
     {
-        // Validasi form input
+        // validasi form input
         $validated = $request->validate([
             'nama' => 'required|string',
-            'kecamatan_nama' => 'required|string',
+            'kecamatan_nama' => 'required|string'
         ]);
-        
-        // Mendapatkan data berdasarkan Id
+
         $kelurahan = Kelurahan::find($id);
         $kelurahan->update($validated);
-
-        // Update data
-        // $kelurahan->nama = $request->input('nama');
-        // $kelurahan->kecamatan_nama = $request->input('kecamatan_nama');
-        // $kelurahan->save();
-
-        return redirect('/dashboard/kelurahan')->with('pesan', 'Data Berhasil di Perbarui');
+        
+        return redirect('dashboard/kelurahan')->with('pesan', 'Data Berhasil di Perbarui');
     }
 
     /**
@@ -88,6 +82,6 @@ class KelurahanController
         $kelurahan = Kelurahan::find($id);
         $kelurahan->delete();
 
-        return redirect('/dashboard/kelurahan')->with('pesan', 'Data Berhasil di Hapus');
+        return redirect('dashboard/kelurahan')->with('pesan', 'Data Berhasil di Hapus');
     }
 }

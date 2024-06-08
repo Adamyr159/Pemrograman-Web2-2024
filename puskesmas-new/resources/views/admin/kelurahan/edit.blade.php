@@ -25,6 +25,6 @@
                     <button type="reset" class="btn btn-warning">Reset</button>
                 </div>
             </div>
-        </form>
+        </form>
     </x-slot>
 </x-layout>

@@ -1,14 +1,16 @@
 <x-layout>
     <x-slot name="page_name">Halaman Kelurahan</x-slot>
     <x-slot name="page_content">
+
         @if (session('pesan'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong> {{ session('pesan') }}</strong>
+                <strong>{{ session('pesan') }}</strong> 
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true">&times;</span>
                 </button>
             </div>
         @endif
+
         <a href="{{ url('dashboard/kelurahan/create') }}" class="btn btn-primary">+ Tambah Kelurahan</a>
         <table class="table table-bordered">
             <thead>
@@ -31,9 +33,8 @@
                             <form action="{{ url('dashboard/kelurahan/destroy', $kelurahan->id) }}" method="post" class="d-inline">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah yakin ingin menghapus data kelurahan {{$kelurahan->nama}}?')"><i class="far fa-trash-alt"></i> Hapus</button>
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data?')"><i class="far fa-edit"></i>Hapus</button>
                             </form>
-                            
                         </td>
                     </tr>
                 @endforeach

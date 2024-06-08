@@ -35,47 +35,65 @@ class PasienController
             'nama' => 'required|string',
             'tmp_lahir' => 'required|string',
             'tgl_lahir' => 'required|date',
-            'gender' => 'required|in:L, P',
+            'gender' => 'required|string',
             'email' => 'required|string',
             'alamat' => 'required|string',
             'kelurahan_nama' => 'required|string',
         ]);
 
         Pasien::create($validated);
-        return redirect('/dashboard/pasien');
+        return redirect('/dashboard/pasien')->with('pesan', 'Data Berhasil di Tambahkan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Pasien $pasien)
+    public function show(string $id)
     {
         // Mendapatkan data berdasarkan Id
-        // $list_pasien = Pasien::find($id);
+        $pasien = Pasien::find($id);
         return view('admin.pasien.show', compact('pasien'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pasien $pasien)
+    public function edit(string $id)
     {
-        //
+        $pasien = Pasien::find($id);
+        return view('admin.pasien.edit', compact('pasien'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pasien $pasien)
+    public function update(Request $request, string $id)
     {
-        //
+        // Validasi form input
+        $validated = $request->validate([
+            'kode' => 'required|string',
+            'nama' => 'required|string',
+            'tmp_lahir' => 'required|string',
+            'tgl_lahir' => 'required|date',
+            'gender' => 'required|string',
+            'email' => 'required|string',
+            'alamat' => 'required|string',
+            'kelurahan_nama' => 'required|string',
+        ]);
+
+        $pasien = Pasien::find($id);
+        $pasien->update($validated);
+        return redirect('/dashboard/pasien')->with('pesan', 'Data Berhasil di Perbarui');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pasien $pasien)
+    public function destroy(string $id)
     {
-        //
+        $pasien = Pasien::find($id);
+        $pasien->delete();
+
+        return redirect('dashboard/pasien')->with('pesan', 'Data Berhasil di Hapus');
     }
 }
