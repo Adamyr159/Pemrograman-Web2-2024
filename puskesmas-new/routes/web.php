@@ -27,23 +27,24 @@ Route::middleware('auth')->group(function () {
         // Kelurahan
         Route::prefix('kelurahan')->group(function () {
             Route::get('/', [KelurahanController::class, 'index']);
+            Route::get('/show/{id}', [KelurahanController::class, 'show']);
             Route::get('/create', [KelurahanController::class, 'create']);
             Route::post('/store', [KelurahanController::class, 'store']);
-            Route::get('/show/{id}', [KelurahanController::class, 'show']);
             Route::get('/edit/{id}', [KelurahanController::class, 'edit']);
             Route::put('/update/{id}', [KelurahanController::class, 'update']);
             Route::delete('/destroy/{id}', [KelurahanController::class, 'destroy']);
         });
     
         // Pasien
-        Route::get('/pasien', [PasienController::class, 'index']);
-        Route::get('/pasien/create', [PasienController::class, 'create']);
-        Route::post('/pasien/store', [PasienController::class, 'store']);
-        Route::get('/pasien/show/{id}', [PasienController::class, 'show']);
-        Route::get('/pasien/edit/{id}', [PasienController::class, 'edit']);
-        Route::put('/pasien/update/{id}', [PasienController::class, 'update']);
-        Route::delete('/pasien/destroy/{id}', [PasienController::class, 'destroy']);
-        
+        Route::middleware('admin')->prefix('pasien')->group(function () {
+            Route::get('/', [PasienController::class, 'index']);
+            Route::get('/create', [PasienController::class, 'create']);
+            Route::post('/store', [PasienController::class, 'store']);
+            Route::get('/show/{id}', [PasienController::class, 'show']);
+            Route::get('/edit/{id}', [PasienController::class, 'edit']);
+            Route::put('/update/{id}', [PasienController::class, 'update']);
+            Route::delete('/destroy/{id}', [PasienController::class, 'destroy']);
+        });
     });
 
     

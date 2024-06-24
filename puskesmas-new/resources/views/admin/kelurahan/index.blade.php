@@ -1,3 +1,5 @@
+@use(App\Models\User)
+
 <x-layout>
     <x-slot name="page_name">Halaman Kelurahan</x-slot>
     <x-slot name="page_content">
@@ -22,20 +24,25 @@
                 </tr>
             </thead>
             <tbody>
+                
                 @foreach ($list_kelurahan as $kelurahan)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $kelurahan->nama }}</td>
                         <td>{{ $kelurahan->kecamatan_nama }}</td>
-                        <td>
-                            <a href="{{ url('dashboard/kelurahan/show', $kelurahan->id) }}" class="btn btn-info btn-sm"><i class="far fa-eye"></i> Lihat</a>
-                            <a href="{{ url('dashboard/kelurahan/edit', $kelurahan->id) }}" class="btn btn-warning btn-sm"><i class="far fa-edit"></i> Edit</a>
-                            <form action="{{ url('dashboard/kelurahan/destroy', $kelurahan->id) }}" method="post" class="d-inline">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data?')"><i class="far fa-edit"></i>Hapus</button>
-                            </form>
-                        </td>
+                        @auth
+                            @if (Auth::user()->role === User::ROLE_ADMIN)
+                                <td>
+                                    <a href="{{ url('dashboard/kelurahan/show', $kelurahan->id) }}" class="btn btn-info btn-sm"><i class="far fa-eye"></i> Lihat</a>
+                                    <a href="{{ url('dashboard/kelurahan/edit', $kelurahan->id) }}" class="btn btn-warning btn-sm"><i class="far fa-edit"></i> Edit</a>
+                                    <form action="{{ url('dashboard/kelurahan/destroy', $kelurahan->id) }}" method="post" class="d-inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data?')"><i class="far fa-edit"></i>Hapus</button>
+                                    </form>
+                                </td>
+                            @endif
+                        @endauth
                     </tr>
                 @endforeach
             </tbody>
